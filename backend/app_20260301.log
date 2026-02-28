@@ -28,3 +28,5 @@
 2026-03-01 00:39:09,829 - chatbot - ERROR - Chat error: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
 2026-03-01 00:39:09,832 - chatbot - ERROR - HTTP error: An error occurred while processing your message: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
 2026-03-01 00:40:31,996 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:40:35,944 - chatbot - INFO - Starting up...
+2026-03-01 00:40:36,013 - chatbot - INFO - Connected to MongoDB
