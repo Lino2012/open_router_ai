@@ -1,0 +1,60 @@
+2026-02-28 23:24:48,377 - chatbot - INFO - Starting up...
+2026-02-28 23:24:48,443 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:25:44,585 - chatbot - ERROR - HTTP error: Not Found
+2026-02-28 23:26:26,020 - chatbot - ERROR - HTTP error: Not Found
+2026-02-28 23:26:43,996 - chatbot - ERROR - HTTP error: Not Found
+2026-02-28 23:27:00,699 - chatbot - ERROR - HTTP error: Not Found
+2026-02-28 23:27:38,279 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:27:41,240 - chatbot - INFO - Starting up...
+2026-02-28 23:27:41,330 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:11,479 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:28:13,862 - chatbot - INFO - Starting up...
+2026-02-28 23:28:13,956 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:16,621 - chatbot - INFO - Starting up...
+2026-02-28 23:28:16,716 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:19,076 - chatbot - INFO - Starting up...
+2026-02-28 23:28:19,182 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:20,343 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:28:22,800 - chatbot - INFO - Starting up...
+2026-02-28 23:28:22,892 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:44,492 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:28:46,801 - chatbot - INFO - Starting up...
+2026-02-28 23:28:46,877 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:28:49,321 - chatbot - INFO - Starting up...
+2026-02-28 23:28:49,396 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:29:19,512 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:29:21,989 - chatbot - INFO - Starting up...
+2026-02-28 23:29:22,081 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:29:24,403 - chatbot - INFO - Starting up...
+2026-02-28 23:29:24,507 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:29:26,359 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:29:28,669 - chatbot - INFO - Starting up...
+2026-02-28 23:29:28,748 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:32:22,563 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:32:24,747 - chatbot - INFO - Starting up...
+2026-02-28 23:32:24,842 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:32:29,378 - chatbot - INFO - Starting up...
+2026-02-28 23:32:29,465 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:32:34,025 - chatbot - INFO - Starting up...
+2026-02-28 23:32:34,129 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:32:47,304 - chatbot - ERROR - HTTP error: Could not validate credentials
+2026-02-28 23:32:51,264 - chatbot - ERROR - HTTP error: Could not validate credentials
+2026-02-28 23:33:18,212 - chatbot - ERROR - HTTP error: Could not validate credentials
+2026-02-28 23:33:19,639 - chatbot - ERROR - HTTP error: Could not validate credentials
+2026-02-28 23:33:20,154 - chatbot - ERROR - HTTP error: Could not validate credentials
+2026-02-28 23:37:22,965 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:42:43,576 - chatbot - INFO - Starting up...
+2026-02-28 23:42:43,660 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:45:30,741 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:45:36,356 - chatbot - INFO - Starting up...
+2026-02-28 23:45:36,452 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:48:37,020 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:48:42,448 - chatbot - INFO - Starting up...
+2026-02-28 23:48:42,539 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:57:09,596 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-02-28 23:57:10,763 - chatbot - INFO - Disconnected from MongoDB
+2026-02-28 23:57:17,040 - chatbot - INFO - Starting up...
+2026-02-28 23:57:17,131 - chatbot - INFO - Connected to MongoDB
+2026-02-28 23:57:35,586 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-02-28 23:58:15,175 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-03-01 00:00:18,531 - chatbot - INFO - Disconnected from MongoDB

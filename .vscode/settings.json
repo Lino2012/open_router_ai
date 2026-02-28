@@ -9,5 +9,6 @@
     },
     "python.analysis.extraPaths": [
         "C:/Lino/Open Router/open_router_ai/backend"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

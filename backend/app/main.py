@@ -47,7 +47,7 @@ app.add_middleware(
 # Add exception handlers
 add_exception_handlers(app)
 
-# Include routers
+# Include routers with proper prefixes
 app.include_router(auth_router, prefix="/api")
 app.include_router(chat_router, prefix="/api")
 app.include_router(memory_router, prefix="/api")

@@ -16,6 +16,15 @@ class ChatApp {
     
     async init() {
         // Check authentication
+        // Check authentication
+    if (!isAuthenticated()) {
+        window.location.href = '/login.html';
+        return;
+    }
+    
+    // Load user data
+    await this.loadUserProfile();
+    await this.loadSessions();
         requireAuth();
         
         // Load user data
@@ -184,60 +193,64 @@ class ChatApp {
     }
     
     async sendMessage() {
-        const input = document.getElementById('messageInput');
-        const message = input.value.trim();
+    const input = document.getElementById('messageInput');
+    const message = input.value.trim();
+    
+    if (!message || this.isLoading) return;
+    
+    // Get selected model
+    const modelSelect = document.getElementById('modelSelect');
+    const selectedModel = modelSelect ? modelSelect.value : 'x-ai/grok-3-mini-beta';
+    
+    // Hide welcome message
+    document.getElementById('welcomeMessage').classList.add('hidden');
+    
+    // Add user message to UI
+    this.addMessageToUI('user', message);
+    
+    // Clear input
+    input.value = '';
+    input.style.height = 'auto';
+    
+    // Show typing indicator
+    this.showTypingIndicator();
+    
+    this.isLoading = true;
+    this.updateSendButton();
+    
+    try {
+        // Send message with model info in metadata
+        const response = await chatAPI.sendMessage(
+            message, 
+            this.currentSessionId,
+            this.memoryEnabled,
+            { model: selectedModel }
+        );
         
-        if (!message || this.isLoading) return;
+        // Remove typing indicator
+        this.hideTypingIndicator();
         
-        // Hide welcome message
-        document.getElementById('welcomeMessage').classList.add('hidden');
+        // Add AI response to UI
+        this.addMessageToUI('assistant', response.message);
         
-        // Add user message to UI
-        this.addMessageToUI('user', message);
-        
-        // Clear input
-        input.value = '';
-        input.style.height = 'auto';
-        
-        // Show typing indicator
-        this.showTypingIndicator();
-        
-        this.isLoading = true;
-        this.updateSendButton();
-        
-        try {
-            // Send message with model info
-            const response = await chatAPI.sendMessage(
-                message, 
-                this.currentSessionId,
-                this.memoryEnabled,
-                { model: this.currentModel }
-            );
-            
-            // Remove typing indicator
-            this.hideTypingIndicator();
-            
-            // Add AI response to UI
-            this.addMessageToUI('assistant', response.message);
-            
-            // Update session info
-            if (!this.currentSessionId) {
-                this.currentSessionId = response.session_id;
-                await this.loadSessions();
-            }
-            
-            // Load preferences
-            this.loadPreferences();
-            
-        } catch (error) {
-            console.error('Failed to send message:', error);
-            this.hideTypingIndicator();
-            this.showError('Failed to send message. Please try again.');
-        } finally {
-            this.isLoading = false;
-            this.updateSendButton();
+        // Update session info
+        if (!this.currentSessionId) {
+            this.currentSessionId = response.session_id;
+            await this.loadSessions();
         }
+        
+        // Load preferences
+        this.loadPreferences();
+        
+    } catch (error) {
+        console.error('Failed to send message:', error);
+        this.hideTypingIndicator();
+        this.showError('Failed to send message. Please try again.');
+    } finally {
+        this.isLoading = false;
+        this.updateSendButton();
     }
+}
     
     addMessageToUI(role, content) {
         const container = document.getElementById('messagesContainer');

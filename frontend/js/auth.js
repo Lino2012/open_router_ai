@@ -115,6 +115,11 @@ export function initLogout() {
     });
 }
 
+// Check if user is authenticated
+export function isAuthenticated() {
+    return !!localStorage.getItem('token');
+}
+
 // Initialize auth based on page
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('login')) {
