@@ -1,0 +1,13 @@
+{
+    "python.defaultInterpreterPath": "C:/Lino/Open Router/open_router_ai/backend/venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverity": {
+        "reportMissingImports": "warning",
+        "reportMissingModuleSource": "warning"
+    },
+    "python.analysis.extraPaths": [
+        "C:/Lino/Open Router/open_router_ai/backend"
+    ]
+}
