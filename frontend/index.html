@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova AI - Intelligent Chat Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <h1 class="logo">NOVA<span class="glow">AI</span></h1>
+            </div>
+            
+            <button class="new-chat-btn" id="newChatBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                New Chat
+            </button>
+            
+            <div class="conversations-list" id="conversationsList">
+                <div class="loading-spinner small"></div>
+            </div>
+            
+            <div class="memory-toggle">
+                <span class="memory-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                        <path d="M8 8h8M8 12h8M8 16h4"/>
+                    </svg>
+                    Memory
+                </span>
+                <label class="switch">
+                    <input type="checkbox" id="memoryToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="user-profile" id="userProfile">
+                <div class="user-avatar">
+                    <span id="userInitials">U</span>
+                </div>
+                <div class="user-info">
+                    <span class="username" id="username">Loading...</span>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <div class="chat-header">
+                <div class="header-left">
+                    <h2 id="currentSessionTitle">New Chat</h2>
+                </div>
+                <div class="header-right">
+                    <div class="model-selector">
+                        <select id="modelSelect">
+                            <option value="x-ai/grok-3-mini-beta" selected>Grok 3 Mini (Free)</option>
+                            <option value="x-ai/grok-3-beta">Grok 3</option>
+                        </select>
+                    </div>
+                    <div class="memory-indicator" id="memoryIndicator">
+                        <span class="indicator-dot active"></span>
+                        <span>Memory Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h2>Welcome to Nova AI</h2>
+                    <p>Start a conversation with your intelligent assistant</p>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper glass-effect">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Type your message here..."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-btn" id="sendBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel -->
+        <aside class="right-panel" id="rightPanel">
+            <div class="panel-header">
+                <h3>Memory Preview</h3>
+            </div>
+            <div class="memory-preview" id="memoryPreview">
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="preferences-panel" id="preferencesPanel">
+                <h4>Stored Preferences</h4>
+                <div class="preferences-list" id="preferencesList">
+                    <!-- Preferences will be loaded here -->
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
