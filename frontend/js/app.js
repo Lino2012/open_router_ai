@@ -1,4 +1,4 @@
-import { isAuthenticated, requireAuth } from './auth.js';
+import { requireAuth, initLogout, isAuthenticated } from './auth.js';
 import { chatAPI, memoryAPI } from './api.js';
 
 // Main App Class
@@ -43,35 +43,80 @@ class ChatApp {
     }
     
     setupEventListeners() {
-        // New chat button
-        document.getElementById('newChatBtn').addEventListener('click', () => this.newChat());
-        
-        // Send message
-        document.getElementById('sendBtn').addEventListener('click', () => this.sendMessage());
-        document.getElementById('messageInput').addEventListener('keydown', (e) => {
+    console.log('Setting up event listeners');
+    
+    // New chat button
+    const newChatBtn = document.getElementById('newChatBtn');
+    if (newChatBtn) {
+        newChatBtn.addEventListener('click', () => {
+            console.log('New chat clicked');
+            this.newChat();
+        });
+    } else {
+        console.log('New chat button not found');
+    }
+    
+    // Send button
+    const sendBtn = document.getElementById('sendBtn');
+    const messageInput = document.getElementById('messageInput');
+    
+    if (sendBtn) {
+        console.log('Send button found, attaching click handler');
+        sendBtn.onclick = () => {  // Use onclick instead of addEventListener to ensure it works
+            console.log('Send button clicked');
+            this.sendMessage();
+        };
+    } else {
+        console.log('Send button not found');
+    }
+    
+    // Enter key handler
+    if (messageInput) {
+        console.log('Message input found');
+        messageInput.onkeydown = (e) => {  // Use onkeydown instead of addEventListener
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
+                console.log('Enter pressed');
                 this.sendMessage();
             }
-        });
+        };
         
-        // Memory toggle
-        document.getElementById('memoryToggle').addEventListener('change', (e) => {
+        // Auto-resize
+        messageInput.oninput = function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        };
+    } else {
+        console.log('Message input not found');
+    }
+    
+    // Memory toggle
+    const memoryToggle = document.getElementById('memoryToggle');
+    if (memoryToggle) {
+        memoryToggle.onchange = (e) => {
             this.memoryEnabled = e.target.checked;
             this.updateMemoryIndicator();
-        });
-        
-        // Model selector
-        document.getElementById('modelSelect').addEventListener('change', (e) => {
+        };
+    }
+    
+    // Model selector
+    const modelSelect = document.getElementById('modelSelect');
+    if (modelSelect) {
+        modelSelect.onchange = (e) => {
             this.currentModel = e.target.value;
-        });
-        
-        // Auto-resize textarea
-        document.getElementById('messageInput').addEventListener('input', function() {
+        };
+    }
+    
+    console.log('Event listeners setup complete');
+    
+    // Auto-resize textarea
+    if (messageInput) {
+        messageInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
         });
     }
+}
     
     async loadUserProfile() {
         const username = localStorage.getItem('username');
@@ -193,14 +238,16 @@ class ChatApp {
     }
     
     async sendMessage() {
+    console.log('sendMessage called');
     const input = document.getElementById('messageInput');
     const message = input.value.trim();
     
-    if (!message || this.isLoading) return;
+    console.log('Message:', message);
     
-    // Get selected model
-    const modelSelect = document.getElementById('modelSelect');
-    const selectedModel = modelSelect ? modelSelect.value : 'x-ai/grok-3-mini-beta';
+    if (!message || this.isLoading) {
+        console.log('No message or loading');
+        return;
+    }
     
     // Hide welcome message
     document.getElementById('welcomeMessage').classList.add('hidden');
@@ -219,13 +266,19 @@ class ChatApp {
     this.updateSendButton();
     
     try {
-        // Send message with model info in metadata
+        console.log('Sending message to API...');
+        // Get selected model
+        const modelSelect = document.getElementById('modelSelect');
+        const selectedModel = modelSelect ? modelSelect.value : 'x-ai/grok-3-mini-beta';
+        
         const response = await chatAPI.sendMessage(
             message, 
             this.currentSessionId,
             this.memoryEnabled,
             { model: selectedModel }
         );
+        
+        console.log('API response:', response);
         
         // Remove typing indicator
         this.hideTypingIndicator();
@@ -238,9 +291,6 @@ class ChatApp {
             this.currentSessionId = response.session_id;
             await this.loadSessions();
         }
-        
-        // Load preferences
-        this.loadPreferences();
         
     } catch (error) {
         console.error('Failed to send message:', error);

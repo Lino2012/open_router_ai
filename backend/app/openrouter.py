@@ -9,7 +9,7 @@ client = openai.OpenAI(
     api_key=settings.OPENROUTER_API_KEY,
     default_headers={
         "HTTP-Referer": "http://localhost:8000",
-        "X-Title": "Nova AI Chatbot with MongoDB Memory",
+        "X-Title": "Nova AI Chatbot",
     }
 )
 

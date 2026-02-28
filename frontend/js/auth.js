@@ -1,11 +1,40 @@
-import { authAPI } from './api.js';
+// API Configuration
+const API_BASE_URL = 'http://localhost:8000/api';
+
+// Register function
+async function register(username, email, password) {
+    const response = await fetch(`${API_BASE_URL}/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password })
+    });
+    return await response.json();
+}
+
+// Login function
+async function login(username, password) {
+    const formData = new URLSearchParams();
+    formData.append('username', username);
+    formData.append('password', password);
+    
+    const response = await fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData
+    });
+    return await response.json();
+}
 
 // Check if user is authenticated
 export function isAuthenticated() {
     return !!localStorage.getItem('token');
 }
 
-// Redirect to login if not authenticated
+// Require authentication
 export function requireAuth() {
     if (!isAuthenticated() && !window.location.pathname.includes('login') && !window.location.pathname.includes('register')) {
         window.location.href = '/login.html';
@@ -25,14 +54,13 @@ export function initLogin() {
         const loginBtn = document.getElementById('loginBtn');
         const errorMessage = document.getElementById('errorMessage');
         
-        // Show loading
         loginBtn.disabled = true;
         loginBtn.querySelector('span').classList.add('hidden');
         loginBtn.querySelector('.loading-spinner').classList.remove('hidden');
         errorMessage.classList.add('hidden');
         
         try {
-            const data = await authAPI.login(username, password);
+            const data = await login(username, password);
             
             if (data.access_token) {
                 localStorage.setItem('token', data.access_token);
@@ -52,7 +80,7 @@ export function initLogin() {
     });
 }
 
-// Handle registration form
+// Handle register form
 export function initRegister() {
     const form = document.getElementById('registerForm');
     if (!form) return;
@@ -68,14 +96,12 @@ export function initRegister() {
         const errorMessage = document.getElementById('errorMessage');
         const successMessage = document.getElementById('successMessage');
         
-        // Validate passwords match
         if (password !== confirmPassword) {
             errorMessage.textContent = 'Passwords do not match';
             errorMessage.classList.remove('hidden');
             return;
         }
         
-        // Show loading
         registerBtn.disabled = true;
         registerBtn.querySelector('span').classList.add('hidden');
         registerBtn.querySelector('.loading-spinner').classList.remove('hidden');
@@ -83,15 +109,17 @@ export function initRegister() {
         successMessage.classList.add('hidden');
         
         try {
-            await authAPI.register({ username, email, password });
+            const data = await register(username, email, password);
             
-            successMessage.textContent = 'Registration successful! Redirecting to login...';
-            successMessage.classList.remove('hidden');
-            
-            // Redirect to login after 2 seconds
-            setTimeout(() => {
-                window.location.href = '/login.html';
-            }, 2000);
+            if (data.id) {
+                successMessage.textContent = 'Registration successful! Redirecting to login...';
+                successMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 2000);
+            } else {
+                throw new Error(data.detail || 'Registration failed');
+            }
         } catch (error) {
             errorMessage.textContent = error.message;
             errorMessage.classList.remove('hidden');
@@ -115,12 +143,7 @@ export function initLogout() {
     });
 }
 
-// Check if user is authenticated
-export function isAuthenticated() {
-    return !!localStorage.getItem('token');
-}
-
-// Initialize auth based on page
+// Initialize based on page
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('login')) {
         initLogin();

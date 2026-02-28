@@ -4,66 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Nova AI</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: Arial; padding: 20px; background: #0B0B0F; color: white; }
+        .container { max-width: 400px; margin: 0 auto; background: #1A1A22; padding: 30px; border-radius: 16px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; background: #14141A; border: 1px solid #2A1F3D; color: white; border-radius: 8px; }
+        button { width: 100%; padding: 12px; background: #6A00FF; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .error { color: #FF4D4D; margin-top: 10px; }
+        .success { color: #00C853; margin-top: 10px; }
+    </style>
 </head>
-<body class="auth-page">
-    <div class="auth-container">
-        <div class="auth-card glass-effect">
-            <div class="auth-header">
-                <h1 class="logo">NOVA<span class="glow">AI</span></h1>
-                <p>Create your account</p>
-            </div>
+<body>
+    <div class="container">
+        <h1>NOVA<span style="color: #6A00FF;">AI</span></h1>
+        <p>Create your account</p>
+        
+        <div>
+            <input type="text" id="username" placeholder="Username" value="testuser">
+            <input type="email" id="email" placeholder="Email" value="test@example.com">
+            <input type="password" id="password" placeholder="Password" value="password123">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" value="password123">
             
-            <div class="auth-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Choose a username">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a password">
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
-                </div>
-                
-                <button class="auth-btn" onclick="testRegister()">Register</button>
-            </div>
+            <button onclick="register()">Register</button>
             
-            <div class="auth-footer">
-                <p>Already have an account? <a href="login.html">Login</a></p>
-            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="login.html" style="color: #6A00FF;">Already have an account? Login</a>
+            </p>
             
-            <div id="result" style="margin-top: 20px; padding: 10px; text-align: center;"></div>
+            <div id="message" style="margin-top: 20px; text-align: center;"></div>
         </div>
     </div>
 
     <script>
-        async function testRegister() {
+        async function register() {
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            const resultDiv = document.getElementById('result');
+            const messageDiv = document.getElementById('message');
             
             if (password !== confirmPassword) {
-                resultDiv.innerHTML = '❌ Passwords do not match';
-                resultDiv.style.color = 'red';
+                messageDiv.innerHTML = '<span class="error">❌ Passwords do not match</span>';
                 return;
             }
             
-            resultDiv.innerHTML = 'Attempting to register...';
-            resultDiv.style.color = 'blue';
+            messageDiv.innerHTML = '⏳ Registering...';
             
             try {
+                console.log('Sending request to:', 'http://localhost:8000/api/register');
+                console.log('Data:', { username, email, password });
+                
                 const response = await fetch('http://localhost:8000/api/register', {
                     method: 'POST',
                     headers: {
@@ -76,23 +65,22 @@
                     })
                 });
                 
+                console.log('Response status:', response.status);
+                
                 const data = await response.json();
+                console.log('Response data:', data);
                 
                 if (response.ok) {
-                    resultDiv.innerHTML = '✅ Registration successful! Redirecting to login...';
-                    resultDiv.style.color = 'green';
-                    
-                    // Redirect to login after 2 seconds
+                    messageDiv.innerHTML = '<span class="success">✅ Registration successful! Redirecting...</span>';
                     setTimeout(() => {
                         window.location.href = '/login.html';
                     }, 2000);
                 } else {
-                    resultDiv.innerHTML = '❌ Error: ' + (data.detail || 'Registration failed');
-                    resultDiv.style.color = 'red';
+                    messageDiv.innerHTML = `<span class="error">❌ Error: ${data.detail || 'Registration failed'}</span>`;
                 }
             } catch (error) {
-                resultDiv.innerHTML = '❌ Connection error: ' + error.message;
-                resultDiv.style.color = 'red';
+                console.error('Fetch error:', error);
+                messageDiv.innerHTML = `<span class="error">❌ Connection error: ${error.message}</span>`;
             }
         }
     </script>

@@ -3,91 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Nova AI</title>
+    <title>Nova AI - Intelligent Chat Assistant</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+    // Simple test to see if button exists and works
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded');
+        const sendBtn = document.getElementById('sendBtn');
+        const input = document.getElementById('messageInput');
+        
+        console.log('Send button found:', sendBtn);
+        console.log('Input found:', input);
+        
+        if (sendBtn) {
+            sendBtn.onclick = function() {
+                alert('Button clicked! Message: ' + input.value);
+            };
+        }
+    });
+</script>
 </head>
-<body class="auth-page">
-    <div class="auth-container">
-        <div class="auth-card glass-effect">
-            <div class="auth-header">
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
                 <h1 class="logo">NOVA<span class="glow">AI</span></h1>
-                <p>Welcome back</p>
             </div>
             
-            <div class="auth-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" value="testuser">
+            <button class="new-chat-btn" id="newChatBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                New Chat
+            </button>
+            
+            <div class="conversations-list" id="conversationsList">
+                <div class="loading-spinner small"></div>
+            </div>
+            
+            <div class="memory-toggle">
+                <span class="memory-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                        <path d="M8 8h8M8 12h8M8 16h4"/>
+                    </svg>
+                    Memory
+                </span>
+                <label class="switch">
+                    <input type="checkbox" id="memoryToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="user-profile" id="userProfile">
+                <div class="user-avatar">
+                    <span id="userInitials">U</span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" value="password123">
+                <div class="user-info">
+                    <span class="username" id="username">Loading...</span>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
                 </div>
-                
-                <button class="auth-btn" id="loginBtn">Login</button>
             </div>
-            
-            <div class="auth-footer">
-                <p>Don't have an account? <a href="register.html">Register</a></p>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <div class="chat-header">
+                <div class="header-left">
+                    <h2 id="currentSessionTitle">New Chat</h2>
+                </div>
+                <div class="header-right">
+                    <div class="model-selector">
+                        <select id="modelSelect">
+                            <option value="x-ai/grok-3-mini-beta" selected>Grok 3 Mini (Free)</option>
+                            <option value="x-ai/grok-3-beta">Grok 3</option>
+                        </select>
+                    </div>
+                    <div class="memory-indicator" id="memoryIndicator">
+                        <span class="indicator-dot active"></span>
+                        <span>Memory Active</span>
+                    </div>
+                </div>
             </div>
-            
-            <div id="result" style="margin-top: 20px; padding: 10px; text-align: center;"></div>
-        </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h2>Welcome to Nova AI</h2>
+                    <p>Start a conversation with your intelligent assistant</p>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper glass-effect">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Type your message here..."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-btn" id="sendBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel -->
+        <aside class="right-panel" id="rightPanel">
+            <div class="panel-header">
+                <h3>Memory Preview</h3>
+            </div>
+            <div class="memory-preview" id="memoryPreview">
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="preferences-panel" id="preferencesPanel">
+                <h4>Stored Preferences</h4>
+                <div class="preferences-list" id="preferencesList"></div>
+            </div>
+        </aside>
     </div>
 
-    <script>
-        document.getElementById('loginBtn').addEventListener('click', async function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const resultDiv = document.getElementById('result');
-            
-            if (!username || !password) {
-                resultDiv.innerHTML = '❌ Please enter username and password';
-                resultDiv.style.color = 'red';
-                return;
-            }
-            
-            resultDiv.innerHTML = 'Attempting to login...';
-            resultDiv.style.color = 'blue';
-            
-            try {
-                const formData = new URLSearchParams();
-                formData.append('username', username);
-                formData.append('password', password);
-                
-                const response = await fetch('http://localhost:8000/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: formData
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok && data.access_token) {
-                    resultDiv.innerHTML = '✅ Login successful! Redirecting...';
-                    resultDiv.style.color = 'green';
-                    
-                    // Save token and username
-                    localStorage.setItem('token', data.access_token);
-                    localStorage.setItem('username', username);
-                    
-                    // Redirect to main page
-                    setTimeout(() => {
-                        window.location.href = '/';
-                    }, 1500);
-                } else {
-                    resultDiv.innerHTML = '❌ Error: ' + (data.detail || 'Login failed');
-                    resultDiv.style.color = 'red';
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                resultDiv.innerHTML = '❌ Connection error: ' + error.message;
-                resultDiv.style.color = 'red';
-            }
-        });
-    </script>
+    <!-- Load scripts -->
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/memory.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

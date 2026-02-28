@@ -1,2 +1,30 @@
 2026-03-01 00:00:23,517 - chatbot - INFO - Starting up...
 2026-03-01 00:00:23,641 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:04:22,337 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-03-01 00:05:52,566 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:09:34,404 - chatbot - INFO - Starting up...
+2026-03-01 00:09:34,519 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:12:55,123 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:14:10,091 - chatbot - INFO - Starting up...
+2026-03-01 00:14:10,226 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:17:01,208 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-03-01 00:17:14,891 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-03-01 00:17:27,748 - chatbot - ERROR - HTTP error: Incorrect username or password
+2026-03-01 00:17:34,920 - chatbot - ERROR - HTTP error: Incorrect username or password
+2026-03-01 00:17:59,174 - chatbot - ERROR - HTTP error: Username or email already registered
+2026-03-01 00:32:37,571 - chatbot - ERROR - Chat error: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:32:37,574 - chatbot - ERROR - HTTP error: An error occurred while processing your message: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:35:05,628 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:35:07,576 - chatbot - INFO - Starting up...
+2026-03-01 00:35:07,657 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:36:44,042 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:36:57,495 - chatbot - INFO - Starting up...
+2026-03-01 00:36:57,561 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:37:12,975 - chatbot - ERROR - Chat error: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:37:12,975 - chatbot - ERROR - HTTP error: An error occurred while processing your message: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:38:54,129 - chatbot - INFO - Disconnected from MongoDB
+2026-03-01 00:38:58,747 - chatbot - INFO - Starting up...
+2026-03-01 00:38:58,805 - chatbot - INFO - Connected to MongoDB
+2026-03-01 00:39:09,829 - chatbot - ERROR - Chat error: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:39:09,832 - chatbot - ERROR - HTTP error: An error occurred while processing your message: Error code: 401 - {'error': {'message': 'User not found.', 'code': 401}}
+2026-03-01 00:40:31,996 - chatbot - INFO - Disconnected from MongoDB
