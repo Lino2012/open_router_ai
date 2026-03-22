@@ -1,0 +1,163 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode/settings.json
+
+# Logs
+*.log
+logs/
+app_*.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# MongoDB data (if using local)
+mongodb-data/
+data/
+
+# Redis data
+dump.rdb
+appendonly.aof
+
+# Docker
+docker-compose.override.yml
+*.pid
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.cover
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Uploads
+uploads/
+media/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Project specific
+backend/.env
+backend/app_*.log
+backend/__pycache__/
+backend/**/__pycache__/
+
+# Test files (optional - uncomment if you want to keep them)
+# test_*.py
+# *test.py
+# fix_*.py
+# check_*.py
+
+# Frontend build
+frontend/dist/
+frontend/build/
+
+# Coverage reports
+.coverage
+.coverage.*
+htmlcov/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# mypy
+.mypy_cache/
+
+# pycharm
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Windows
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msu
+*.exe
+*.dll
+*.so
+*.pdb
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*.swp
+*.swo
+*~
